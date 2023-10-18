@@ -1,28 +1,25 @@
-import pytest
-
-from selenium.webdriver.remote.webdriver import WebDriver
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions
+import allure
 from locators import DropdownLocators
+from Page_Object.base_page import BasePage
 
+class MainPage(BasePage):
+    def __init__(self, driver):
+        super().__init__(driver)
+        self.page_url = "https://qa-scooter.praktikum-services.ru/"
 
-class MainPage:
-    def __init__(self, driver: WebDriver):
-        self.driver = driver
-
+    @allure.step("Open the main page")
     def open(self):
-        self.driver.get("https://qa-scooter.praktikum-services.ru/")
+        super().open_page(self.page_url)
 
+    @allure.step("Open dropdown")
     def click_dropdown_button(self, button_number):
-        WebDriverWait(self.driver, 3).until(expected_conditions.visibility_of_element_located(
-            DropdownLocators.BUTTON_CONFIRM))
-        self.driver.find_element(*DropdownLocators.BUTTON_CONFIRM).click()
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-
+        self.wait_for_element_to_be_visible(DropdownLocators.BUTTON_CONFIRM)
+        self.click_element(DropdownLocators.BUTTON_CONFIRM)
+        self.scroll_to_bottom()
         dropdown_element_locator = getattr(DropdownLocators, f'DROPDOWN_ELEMENT_{button_number}', None)
-
         if dropdown_element_locator:
-            self.driver.find_element(*dropdown_element_locator).click()
-        else:
-            raise ValueError(f"Invalid button_number: {button_number}")
+            self.click_element(dropdown_element_locator)
 
+    @allure.step("Check dropdown text")
+    def get_dropdown_text(self, button_number):
+        return self.driver.find_element(*getattr(DropdownLocators, f'DROPDOWN_TEXT_{button_number}')).text

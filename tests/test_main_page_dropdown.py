@@ -1,10 +1,12 @@
 import pytest
+import allure
 from conftest import driver
 from Page_Object.main_page import MainPage
-from locators import DropdownLocators
 
 
 class TestDropdown:
+    @allure.title("Test Dropdown Elements")
+    @allure.description("Test the text of dropdown elements")
     @pytest.mark.parametrize("button_number, expected_text", [
         (1, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."),
         (2, "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим."),
@@ -19,7 +21,5 @@ class TestDropdown:
         main_page = MainPage(driver)
         main_page.open()
         main_page.click_dropdown_button(button_number)
-        dropdown_element = driver.find_element(*getattr(DropdownLocators, f'DROPDOWN_TEXT_{button_number}'))
-        actual_text = dropdown_element.text
-        assert actual_text == expected_text, f"Ожидался текст '{expected_text}', но был получен текст '{actual_text}'"
-
+        dropdown_text = main_page.get_dropdown_text(button_number)
+        assert dropdown_text == expected_text, f"Expected text: '{expected_text}', but got: '{dropdown_text}'"
