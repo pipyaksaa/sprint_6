@@ -1,6 +1,5 @@
 from selenium.webdriver.common.by import By
 
-
 class DropdownLocators:
     BUTTON_CONFIRM = (By.ID, "rcc-confirm-button")
     DROPDOWN_ELEMENT_1 = (By.XPATH, '//div[contains(text(), "Сколько это стоит? И как оплатить?")]')
@@ -30,18 +29,18 @@ class OrderLocators:
     PHONE_INPUT = (By.XPATH, '//input[@placeholder="* Телефон: на него позвонит курьер"]')
     NEXT_BUTTON = (By.XPATH, '//button[contains(text(), "Далее")]')
     DELIVERY_DATE_INPUT = (By.XPATH, '//input[@placeholder="* Когда привезти самокат"]')
-    DATE_INPUT = (By.CLASS_NAME, '.react-datepicker__month-container')
     DROPDOWN_ELEMENT = (By.CLASS_NAME, 'Dropdown-control')
     DROPDOWN_MENU_DAY = (By.XPATH, '//div[@class="Dropdown-option" and @role="option" and @aria-selected="false" and text()="сутки"]')
     CHECKBOXES_ELEMENT = (By.XPATH, '//input[@id="black" and @class="Checkbox_Input__14A2w" and @type="checkbox"]')
-    COURIER_COMMENT_INPUT = (By.CSS_SELECTOR, 'div.Input_InputContainer__3NykH:nth-child(4) > input:nth-child(1)')
+    COURIER_COMMENT_INPUT = (By.XPATH, "//input[@placeholder='Комментарий для курьера']")
     ORDER_BUTTON_ACCEPT = (By.XPATH, '//div[contains(@class, "Order_Buttons")]/button[text()="Заказать"]')
     YES_BUTTON = (By.XPATH, '//button[contains(text(), "Да")]')
     VIEW_STATUS_FORM = (By.CLASS_NAME, 'Order_Modal__YZ-d3')
     VIEW_STATUS_BUTTON = (By.XPATH, '//button[contains(text(), "Посмотреть статус")]')
     SCOOTER_IMAGE = (By.XPATH, '//a[contains(@class, "Header_LogoScooter")]/img[@alt="Scooter"]')
     YANDEX_IMAGE = (By.XPATH, '//a[contains(@class, "Header_LogoYandex")]/img[@alt="Yandex"]')
-    TEXT = (By.CLASS_NAME, "Order_Header__BZXOb")
-    BUTTON_CONFIRM = (By.ID, "rcc-confirm-button")
+    TEXT = (By.XPATH, '//div[text()="Про аренду"]')
+    BUTTON_CONFIRM = ((By.CSS_SELECTOR, 'button#rcc-confirm-button'))
     DZEN = (By.XPATH, '//div[text()="Новости"]')
+
 

@@ -5,8 +5,6 @@ from Page_Object.main_page import MainPage
 
 
 class TestDropdown:
-    @allure.title("Test Dropdown Elements")
-    @allure.description("Test the text of dropdown elements")
     @pytest.mark.parametrize("button_number, expected_text", [
         (1, "Сутки — 400 рублей. Оплата курьеру — наличными или картой."),
         (2, "Пока что у нас так: один заказ — один самокат. Если хотите покататься с друзьями, можете просто сделать несколько заказов — один за другим."),
@@ -17,6 +15,8 @@ class TestDropdown:
         (7, "Да, пока самокат не привезли. Штрафа не будет, объяснительной записки тоже не попросим. Все же свои."),
         (8, "Да, обязательно. Всем самокатов! И Москве, и Московской области.")
     ])
+    @allure.title("Test Dropdown Elements")
+    @allure.description("Test the text of dropdown elements")
     def test_dropdown_elements(self, driver, button_number, expected_text):
         main_page = MainPage(driver)
         main_page.open()

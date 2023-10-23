@@ -17,6 +17,11 @@ class BasePage:
         WebDriverWait(self.driver, 10).until(
             expected_conditions.visibility_of_element_located(locator)
         )
+
+    @step("Find element")
+    def find_element(self, locator):
+        self.driver.find_element(*locator)
+
     @step("Click element")
     def click_element(self, locator):
         self.driver.find_element(*locator).click()
@@ -36,3 +41,18 @@ class BasePage:
         WebDriverWait(self.driver, timeout).until(
             expected_conditions.presence_of_element_located(locator)
         )
+
+    @step("Wait for element to be visible for expected condition")
+    def wait_for_element_to_be_visible_expected_condition(self, locator, timeout=10):
+        WebDriverWait(self.driver, timeout).until(
+            expected_conditions.visibility_of_element_located(locator)
+        )
+
+    @step("Send keys in form")
+    def enter_text(self, locator, text):
+        element = self.driver.find_element(*locator)
+        element.send_keys(text)
+
+    @step("Open new tab")
+    def switch_to_new_window(self):
+        self.driver.switch_to.window(self.driver.window_handles[-1])
